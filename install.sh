@@ -4,20 +4,20 @@ set -e
 
 install_nodejs() {
     local platform=$(uname -s)
-    
+
     case "$platform" in
         Linux|Darwin)
             echo "🚀 Installing Node.js on Unix/Linux/macOS..."
-            
+
             echo "📥 Downloading and installing nvm..."
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-            
+
             echo "🔄 Loading nvm environment..."
             \. "$HOME/.nvm/nvm.sh"
-            
+
             echo "📦 Downloading and installing Node.js v22..."
             nvm install 22
-            
+
             echo -n "✅ Node.js installation completed! Version: "
             node -v # Should print "v22.17.0".
             echo -n "✅ Current nvm version: "
@@ -36,7 +36,7 @@ install_nodejs() {
 if command -v node >/dev/null 2>&1; then
     current_version=$(node -v | sed 's/v//')
     major_version=$(echo $current_version | cut -d. -f1)
-    
+
     if [ "$major_version" -ge 18 ]; then
         echo "Node.js is already installed: v$current_version"
     else
@@ -59,7 +59,7 @@ fi
 # Configure Claude Code to skip onboarding
 echo "Configuring Claude Code to skip onboarding..."
 node --eval '
-    const homeDir = os.homedir(); 
+    const homeDir = os.homedir();
     const filePath = path.join(homeDir, ".claude.json");
     if (fs.existsSync(filePath)) {
         const content = JSON.parse(fs.readFileSync(filePath, "utf-8"));
@@ -103,14 +103,14 @@ echo ""
 echo "📝 Adding environment variables to $rc_file..."
 
 # Check if variables already exist to avoid duplicates
-if [ -f "$rc_file" ] && grep -q "ANTHROPIC_BASE_URL\|ANTHROPIC_API_KEY" "$rc_file"; then
+if [ -f "$rc_file" ] && grep -q "ANTHROPIC_BASE_URL\|ANTHROPIC_AUTH_KEY" "$rc_file"; then
     echo "⚠️ Environment variables already exist in $rc_file. Skipping..."
 else
     # Append new entries
     echo "" >> "$rc_file"
     echo "# Claude Code environment variables" >> "$rc_file"
     echo "export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/" >> "$rc_file"
-    echo "export ANTHROPIC_API_KEY=$api_key" >> "$rc_file"
+    echo "export ANTHROPIC_AUTH_KEY=$api_key" >> "$rc_file"
     echo "✅ Environment variables added to $rc_file"
 fi
 

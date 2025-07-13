@@ -15,15 +15,17 @@ install_nodejs() {
             echo "🔄 Loading nvm environment..."
             \. "$HOME/.nvm/nvm.sh"
             
-            echo "📦 Downloading and installing Node.js v22..."
-            nvm install 22
+            echo "📦 Downloading and installing Node.js LTS..."
+            nvm install --lts
+            nvm use --lts
+            nvm alias default --lts
             
             echo -n "✅ Node.js installation completed! Version: "
-            node -v # Should print "v22.17.0".
+            node -v
             echo -n "✅ Current nvm version: "
-            nvm current # Should print "v22.17.0".
+            nvm current
             echo -n "✅ npm version: "
-            npm -v # Should print "10.9.2".
+            npm -v
             ;;
         *)
             echo "Unsupported platform: $platform"
@@ -54,19 +56,31 @@ if command -v claude >/dev/null 2>&1; then
 else
     echo "Claude Code not found. Installing..."
     npm install -g @anthropic-ai/claude-code
+    
+    # Verify installation
+    if ! command -v claude >/dev/null 2>&1; then
+        echo "❌ Error: Claude Code installation failed. Please check your npm configuration."
+        exit 1
+    fi
+    echo "✅ Claude Code installed successfully: $(claude --version)"
 fi
 
 # Configure Claude Code to skip onboarding
 echo "Configuring Claude Code to skip onboarding..."
-node --eval '
-    const homeDir = os.homedir(); 
-    const filePath = path.join(homeDir, ".claude.json");
-    if (fs.existsSync(filePath)) {
-        const content = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-        fs.writeFileSync(filePath,JSON.stringify({ ...content, hasCompletedOnboarding: true }, 2), "utf-8");
-    } else {
-        fs.writeFileSync(filePath,JSON.stringify({ hasCompletedOnboarding: true }), "utf-8");
-    }'
+if ! node --eval '
+  const fs   = require("fs"),
+        os   = require("os"),
+        path = require("path");
+  const fp = path.join(os.homedir(), ".claude.json");
+  let obj = {};
+  if (fs.existsSync(fp)) {
+    obj = JSON.parse(fs.readFileSync(fp, "utf-8"));
+  }
+  obj.hasCompletedOnboarding = true;
+  fs.writeFileSync(fp, JSON.stringify(obj, null, 2), "utf-8");
+'; then
+    echo "⚠️ Warning: Failed to configure Claude Code onboarding. You may need to complete onboarding manually."
+fi
 
 # Prompt user for API key
 echo "🔑 Please enter your Moonshot API key:"
@@ -109,16 +123,27 @@ else
     # Append new entries
     echo "" >> "$rc_file"
     echo "# Claude Code environment variables" >> "$rc_file"
-    echo "export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/" >> "$rc_file"
-    echo "export ANTHROPIC_API_KEY=$api_key" >> "$rc_file"
+    if [ "$current_shell" = fish ]; then
+      echo "set -Ux ANTHROPIC_BASE_URL https://api.moonshot.cn/anthropic/" >> "$rc_file"
+      echo "set -Ux ANTHROPIC_API_KEY '$api_key'"                  >> "$rc_file"
+    else
+      echo "export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/" >> "$rc_file"
+      echo "export ANTHROPIC_API_KEY='$api_key'"                         >> "$rc_file"
+    fi
     echo "✅ Environment variables added to $rc_file"
 fi
 
 echo ""
 echo "🎉 Installation completed successfully!"
 echo ""
-echo "🔄 Please restart your terminal or run:"
-echo "   source $rc_file"
+if [ "$current_shell" = "fish" ]; then
+    echo "🔄 Please restart your terminal or run:"
+    echo "   source $rc_file"
+    echo "   (Note: Fish universal variables may require a terminal restart)"
+else
+    echo "🔄 Please restart your terminal or run:"
+    echo "   source $rc_file"
+fi
 echo ""
 echo "🚀 Then you can start using Claude Code with:"
 echo "   claude"

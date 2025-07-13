@@ -2,53 +2,59 @@
 
 [中文](README.md) | **English** | [日本語](README_JA.md) | [한국어](README_KO.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [Español](README_ES.md) | [Русский](README_RU.md)
 
-Use Kimi's latest model (kimi-k2-0711-preview) to power your Claude Code.
+Power your Claude Code with Kimi models from multiple AI service providers, offering low-cost, high-quality AI programming experience.
 
-## Quick Installation
+## 🚀 Supported AI Service Providers
 
-1. Go to Kimi Open Platform to apply for an API Key.
+This project supports three AI service providers for you to choose from:
 
-Click to visit: [Kimi Open Platform](https://platform.moonshot.cn/)
+### 1. **Moonshot AI**
+- **Model**: kimi-k2-0711-preview
+- **API Access**: [Kimi Open Platform](https://platform.moonshot.cn/)
+- **Features**: Official service, stable and reliable
 
-Top right corner User Center -> API Key Management -> Create New API Key
+### 2. **SiliconFlow**
+- **Model**: moonshotai/Kimi-K2-Instruct
+- **API Access**: [SiliconFlow Console](https://cloud.siliconflow.cn/account/ak)
+- **Features**: High cost-effectiveness, fast response
 
-2. Quick installation - you will be prompted to enter your API Key, then press Enter to complete.
+### 3. **InfiniAI**
+- **Model**: mo-dbiof4b73ofzda2r (kimi-k2-instruct)
+- **API Access**: [InfiniAI Platform](https://cloud.infini-ai.com/)
+- **Features**: Enterprise-grade service, high concurrency support
+
+## 🔧 Quick Installation
+
+### Step 1: Get API Key
+According to your chosen service provider, go to the corresponding platform to apply for an API Key:
+- **Moonshot AI**: Top right User Center → API Key Management → Create New API Key
+- **SiliconFlow**: Console → Account Management → API Keys
+- **InfiniAI**: Platform Console → API Key Management
+
+### Step 2: One-Click Installation
+Run the installation script, which will prompt you to select a service provider and enter the corresponding API Key:
 
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/jiangye1314/kimi-cc/refs/heads/main/install.sh)"
 ```
 
-3. Start using Claude Code at low cost.
+### Step 3: Start Using
+After installation, you can start using Claude Code at low cost:
 
 ```shell
 claude
 ```
 
-## Features
+## 💡 Usage Instructions
 
-- **Cost-effective**: Use Kimi's competitive pricing instead of direct Anthropic API
-- **Easy setup**: One-command installation with automatic configuration
-- **Seamless integration**: Works with existing Claude Code workflows
-- **Latest model**: Powered by Kimi's kimi-k2-0711-preview model
+1. **Interactive Selection**: Installation will prompt you to choose a service provider (1-3)
+2. **Secure Input**: API Key input process is completely hidden for security
+3. **Automatic Configuration**: Script automatically configures corresponding environment variables
+4. **Ready to Use**: Immediately usable after configuration
 
-## What the installer does
+## 🌟 Key Features
 
-The installation script automatically:
-1. Checks and installs Node.js (v18+) if needed
-2. Installs Claude Code globally via npm
-3. Configures Claude Code to skip onboarding
-4. Prompts for your Moonshot API key
-5. Sets up environment variables to redirect API calls to Kimi's servers
-
-## Manual Configuration
-
-If you prefer to configure manually, set these environment variables:
-
-```bash
-export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/
-export ANTHROPIC_API_KEY=your_moonshot_api_key_here
-```
-
-## Support
-
-For issues or questions, please visit the [Kimi Open Platform](https://platform.moonshot.cn/) or check the original Claude Code documentation. 
+- **Multi-Provider Support**: Choose from three premium AI service providers
+- **Cost Optimization**: Select the most cost-effective service based on your needs
+- **Easy to Use**: One-click installation with no complex configuration
+- **High Compatibility**: Fully compatible with original Claude Code functionality 

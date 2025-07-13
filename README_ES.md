@@ -15,7 +15,7 @@ Esquina superior derecha Centro de usuario -> Gestión de claves API -> Crear nu
 2. Instalación rápida - se te pedirá que ingreses tu clave API, luego presiona Enter para completar.
 
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/jiangye1314/kimi-cc/refs/heads/main/install.sh)"
 ```
 
 3. Comienza a usar Claude Code a bajo costo.

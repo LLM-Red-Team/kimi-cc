@@ -68,9 +68,43 @@ node --eval '
         fs.writeFileSync(filePath,JSON.stringify({ hasCompletedOnboarding: true }), "utf-8");
     }'
 
-# Prompt user for API key
-echo "🔑 Please enter your Moonshot API key:"
-echo "   You can get your API key from: https://platform.moonshot.cn/console/api-keys"
+# Prompt user to select API provider
+echo "🔧 Please select your API provider:"
+echo "   1) Moonshot AI (原月之暗面)"
+echo "   2) 硅基流动 (SiliconFlow)"
+echo "   3) 无问芯穹 (InfiniAI)"
+echo ""
+echo -n "Please enter your choice (1, 2, or 3): "
+read provider_choice
+echo ""
+
+case "$provider_choice" in
+    1)
+        echo "📡 Selected: Moonshot AI"
+        base_url="https://api.moonshot.cn/anthropic/"
+        echo "🔑 Please enter your Moonshot API key:"
+        echo "   You can get your API key from: https://platform.moonshot.cn/console/api-keys"
+        ;;
+    2)
+        echo "📡 Selected: 硅基流动 (SiliconFlow)"
+        base_url="https://api.siliconflow.cn/v1/chat/completions"
+        echo "🔑 Please enter your SiliconFlow API key:"
+        echo "   You can get your API key from: https://cloud.siliconflow.cn/account/ak"
+        echo "   Model: moonshotai/Kimi-K2-Instruct"
+        ;;
+    3)
+        echo "📡 Selected: 无问芯穹 (InfiniAI)"
+        base_url="https://cloud.infini-ai.com/maas/v1/chat/completions"
+        echo "🔑 Please enter your InfiniAI API key:"
+        echo "   You can get your API key from: https://cloud.infini-ai.com/"
+        echo "   Model: mo-dbiof4b73ofzda2r (kimi-k2-instruct)"
+        ;;
+    *)
+        echo "⚠️  Invalid choice. Please run the script again and select 1, 2, or 3."
+        exit 1
+        ;;
+esac
+
 echo "   Note: The input is hidden for security. Please paste your API key directly."
 echo ""
 read -s api_key
@@ -109,7 +143,7 @@ else
     # Append new entries
     echo "" >> "$rc_file"
     echo "# Claude Code environment variables" >> "$rc_file"
-    echo "export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/" >> "$rc_file"
+    echo "export ANTHROPIC_BASE_URL=$base_url" >> "$rc_file"
     echo "export ANTHROPIC_API_KEY=$api_key" >> "$rc_file"
     echo "✅ Environment variables added to $rc_file"
 fi

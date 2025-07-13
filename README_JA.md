@@ -15,7 +15,7 @@ Kimiの最新モデル（kimi-k2-0711-preview）を使用してClaude Codeを駆
 2. クイックインストール - API Keyの入力を求められますので、最後にEnterを押してください。
 
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/jiangye1314/kimi-cc/refs/heads/main/install.sh)"
 ```
 
 3. 低コストでClaude Codeの使用を開始します。

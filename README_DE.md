@@ -15,7 +15,7 @@ Rechts oben Benutzerzentrum -> API-Schlüssel-Verwaltung -> Neuen API-Schlüssel
 2. Schnelle Installation - Sie werden aufgefordert, Ihren API-Schlüssel einzugeben, dann drücken Sie Enter zum Abschluss.
 
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/jiangye1314/kimi-cc/refs/heads/main/install.sh)"
 ```
 
 3. Beginnen Sie mit der kostengünstigen Nutzung von Claude Code.

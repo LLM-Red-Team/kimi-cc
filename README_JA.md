@@ -8,11 +8,19 @@ Kimiの最新モデル（kimi-k2-0711-preview）を使用してClaude Codeを駆
 
 1. Kimi Open PlatformでAPI Keyを申請してください。
 
-こちらをクリック：[Kimi Open Platform](https://platform.moonshot.cn/)
+**重要：API Keyの出所に基づいて正しいプラットフォームを選択してください**
 
-右上角のユーザーセンター -> API Key管理 -> 新しいAPI Keyを作成
+- **中国地域のAPI Keyをお持ちの場合**（https://platform.moonshot.cn から取得）：
+  - こちらをクリック：[Kimi Open Platform（中国）](https://platform.moonshot.cn/)
+  - 右上角のユーザーセンター -> API Key管理 -> 新しいAPI Keyを作成
 
-2. クイックインストール - API Keyの入力を求められますので、最後にEnterを押してください。
+- **国際地域のAPI Keyをお持ちの場合**（https://platform.moonshot.ai から取得）：
+  - こちらをクリック：[Kimi Open Platform（国際）](https://platform.moonshot.ai/)
+  - User Center -> API Keys -> Create API Key
+
+2. クイックインストール - API Keyの入力と地域の選択を求められますので、最後にEnterを押してください。
+
+**⚠️ 重要：インストーラーは使用しているプラットフォームを尋ねます - API Keyの出所に基づいて正しいオプションを選択してください**
 
 ```shell
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
@@ -22,6 +30,30 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/ref
 
 ```shell
 claude
+```
+
+## API Key互換性について
+
+**重要：中国地域と国際地域のAPI Keyは互換性がありません**
+
+- https://platform.moonshot.cnで作成したAPI Keyの場合、`https://api.moonshot.cn/anthropic/`をbase URLとして使用する必要があります
+- https://platform.moonshot.aiで作成したAPI Keyの場合、`https://api.moonshot.ai/anthropic/`をbase URLとして使用する必要があります
+- "Incorrect API key provided"エラーが発生した場合は、base URLがAPI Keyの出所と一致しているか確認してください
+
+## 手動構成
+
+手動で構成したい場合は、API Keyの出所に基づいて正しい環境変数を設定してください：
+
+**中国地域ユーザー：**
+```bash
+export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/
+export ANTHROPIC_API_KEY=your_moonshot_api_key_here
+```
+
+**国際地域ユーザー：**
+```bash
+export ANTHROPIC_BASE_URL=https://api.moonshot.ai/anthropic/
+export ANTHROPIC_API_KEY=your_moonshot_api_key_here
 ```
 
 ## 機能

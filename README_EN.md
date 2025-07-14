@@ -8,11 +8,19 @@ Use Kimi's latest model (kimi-k2-0711-preview) to power your Claude Code.
 
 1. Go to Kimi Open Platform to apply for an API Key.
 
-Click to visit: [Kimi Open Platform](https://platform.moonshot.cn/)
+**Important: Please choose the correct platform based on your API Key source**
 
-Top right corner User Center -> API Key Management -> Create New API Key
+- **If you have a China region API Key** (obtained from https://platform.moonshot.cn):
+  - Click to visit: [Kimi Open Platform (China)](https://platform.moonshot.cn/)
+  - Top right corner User Center -> API Key Management -> Create New API Key
 
-2. Quick installation - you will be prompted to enter your API Key, then press Enter to complete.
+- **If you have an International region API Key** (obtained from https://platform.moonshot.ai):
+  - Click to visit: [Kimi Open Platform (International)](https://platform.moonshot.ai/)
+  - User Center -> API Keys -> Create API Key
+
+2. Quick installation - you will be prompted to enter your API Key and select your region, then press Enter to complete.
+
+**⚠️ Important: The installer will ask which platform you're using - please select the correct option based on your API Key source**
 
 ```shell
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
@@ -22,6 +30,30 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/ref
 
 ```shell
 claude
+```
+
+## API Key Compatibility Notice
+
+**Important: China region and International region API Keys are NOT compatible**
+
+- If you created your API Key at https://platform.moonshot.cn, you MUST use `https://api.moonshot.cn/anthropic/` as the base URL
+- If you created your API Key at https://platform.moonshot.ai, you MUST use `https://api.moonshot.ai/anthropic/` as the base URL
+- If you encounter "Incorrect API key provided" error, please check if your base URL matches your API Key source
+
+## Manual Configuration
+
+If you prefer to configure manually, set the correct environment variables based on your API Key source:
+
+**China region users:**
+```bash
+export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/
+export ANTHROPIC_API_KEY=your_moonshot_api_key_here
+```
+
+**International region users:**
+```bash
+export ANTHROPIC_BASE_URL=https://api.moonshot.ai/anthropic/
+export ANTHROPIC_API_KEY=your_moonshot_api_key_here
 ```
 
 ## Features

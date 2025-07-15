@@ -8,11 +8,19 @@ Verwenden Sie Kimis neuestes Modell (kimi-k2-0711-preview), um Ihren Claude Code
 
 1. Gehen Sie zur Kimi Open Platform, um einen API-Schlüssel zu beantragen.
 
-Klicken Sie hier: [Kimi Open Platform](https://platform.moonshot.cn/)
+**Wichtig: Bitte wählen Sie die richtige Plattform basierend auf der Quelle Ihres API-Schlüssels**
 
-Rechts oben Benutzerzentrum -> API-Schlüssel-Verwaltung -> Neuen API-Schlüssel erstellen
+- **Wenn Sie einen API-Schlüssel für die China-Region haben** (von https://platform.moonshot.cn erhalten):
+  - Klicken Sie hier: [Kimi Open Platform (China)](https://platform.moonshot.cn/)
+  - Rechts oben Benutzerzentrum -> API-Schlüssel-Verwaltung -> Neuen API-Schlüssel erstellen
 
-2. Schnelle Installation - Sie werden aufgefordert, Ihren API-Schlüssel einzugeben, dann drücken Sie Enter zum Abschluss.
+- **Wenn Sie einen API-Schlüssel für die internationale Region haben** (von https://platform.moonshot.ai erhalten):
+  - Klicken Sie hier: [Kimi Open Platform (International)](https://platform.moonshot.ai/)
+  - User Center -> API Keys -> Create API Key
+
+2. Schnelle Installation - Sie werden aufgefordert, Ihren API-Schlüssel einzugeben und Ihre Region auszuwählen, dann drücken Sie Enter zum Abschluss.
+
+**⚠️ Wichtig: Das Installationsprogramm fragt, welche Plattform Sie verwenden - bitte wählen Sie die richtige Option basierend auf der Quelle Ihres API-Schlüssels**
 
 ```shell
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
@@ -40,12 +48,27 @@ Das Installationsskript führt automatisch aus:
 4. Fordert Ihren Moonshot-API-Schlüssel an
 5. Richtet Umgebungsvariablen ein, um API-Aufrufe an Kimis Server umzuleiten
 
+## API-Schlüssel-Kompatibilität
+
+**Wichtig: API-Schlüssel der China-Region und der internationalen Region sind NICHT kompatibel**
+
+- Wenn Sie Ihren API-Schlüssel auf https://platform.moonshot.cn erstellt haben, MÜSSEN Sie `https://api.moonshot.cn/anthropic/` als Basis-URL verwenden
+- Wenn Sie Ihren API-Schlüssel auf https://platform.moonshot.ai erstellt haben, MÜSSEN Sie `https://api.moonshot.ai/anthropic/` als Basis-URL verwenden
+- Wenn Sie den Fehler "Incorrect API key provided" erhalten, überprüfen Sie bitte, ob Ihre Basis-URL mit der Quelle Ihres API-Schlüssels übereinstimmt
+
 ## Manuelle Konfiguration
 
-Wenn Sie manuell konfigurieren möchten, setzen Sie diese Umgebungsvariablen:
+Wenn Sie manuell konfigurieren möchten, setzen Sie die richtigen Umgebungsvariablen basierend auf der Quelle Ihres API-Schlüssels:
 
+**China-Region Benutzer:**
 ```bash
 export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/
+export ANTHROPIC_API_KEY=your_moonshot_api_key_here
+```
+
+**Internationale Region Benutzer:**
+```bash
+export ANTHROPIC_BASE_URL=https://api.moonshot.ai/anthropic/
 export ANTHROPIC_API_KEY=your_moonshot_api_key_here
 ```
 

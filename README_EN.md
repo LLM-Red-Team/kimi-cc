@@ -49,6 +49,36 @@ export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/
 export ANTHROPIC_API_KEY=your_moonshot_api_key_here
 ```
 
+## Troubleshooting
+
+### 401 Error (Authentication Failed)
+
+If you encounter a 401 error, try one of these two solutions:
+
+**Method 1: Check Environment Variables**
+
+After running the script, check the following configurations in your `~/.bashrc` (or `~/.zshrc` if using zsh):
+- Ensure `ANTHROPIC_AUTH_TOKEN` is set correctly
+- Ensure `ANTHROPIC_BASE_URL` is set correctly
+
+**Method 2: Manual Configuration**
+
+Manually set the configuration in `~/.claude/settings.json`:
+```json
+{
+  "ANTHROPIC_AUTH_TOKEN": "your-api-key",
+  "ANTHROPIC_BASE_URL": "set-according-to-api-source"
+}
+```
+
+**Domain Configuration:**
+- If your API was generated under `platform.moonshot.cn`, ensure `ANTHROPIC_BASE_URL` is set to `api.moonshot.cn/anthropic`
+- Otherwise, set it to `api.moonshot.ai/anthropic`
+
+### 429 Error (Rate Limiting)
+
+To resolve 429 errors, make a minimum recharge on the official platform to increase concurrent request limits.
+
 ## Support
 
 For issues or questions, please visit the [Kimi Open Platform](https://platform.moonshot.cn/) or check the original Claude Code documentation. 

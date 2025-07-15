@@ -24,3 +24,33 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/ref
 ```shell
 claude
 ```
+
+## 常见问题与调试
+
+### 401 错误（认证失败）
+
+如果遇到 401 错误，有两种解决方法，任选其一：
+
+**方法1：检查环境变量**
+
+运行脚本后，在 `~/.bashrc`（如果使用 zsh 则在 `~/.zshrc`）中检查以下配置是否正确：
+- `ANTHROPIC_AUTH_TOKEN` 是否设置正确
+- `ANTHROPIC_BASE_URL` 是否设置正确
+
+**方法2：手动配置**
+
+手动在 `~/.claude/settings.json` 中设置：
+```json
+{
+  "ANTHROPIC_AUTH_TOKEN": "你的API密钥",
+  "ANTHROPIC_BASE_URL": "根据API生成来源设置"
+}
+```
+
+**域名配置说明：**
+- 如果你的 API 是在 `platform.moonshot.cn` 下生成的，确保 `ANTHROPIC_BASE_URL` 设置为 `api.moonshot.cn/anthropic`
+- 否则设置为 `api.moonshot.ai/anthropic`
+
+### 429 错误（请求频率限制）
+
+在官方平台充值最低档即提升并发量即可解决429问题。

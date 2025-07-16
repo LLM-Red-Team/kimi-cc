@@ -17,8 +17,16 @@
 
 2. 快速安装，会要求您输入 API Key，最终回车即可。
 
+### For Linux
+
 ```shell
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/LLM-Red-Team/kimi-cc/refs/heads/main/install.sh)"
+```
+
+### For Windows
+
+```powershell
+irm https://raw.githubusercontent.com/JulyFinal/kimi-cc/refs/heads/main/install.ps1 | iex
 ```
 
 3. 开始低成本使用 Claude Code。
